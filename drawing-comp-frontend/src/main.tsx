@@ -1,13 +1,46 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { NextUIProvider } from "@nextui-org/react";
-import App from "./App.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "sonner";
 import "./index.css";
 
+import IndexPage from "./pages/Index.tsx";
+import NotFound from "./pages/NotFound.tsx";
+import TeamOverview from "./pages/TeamOverview.tsx";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <IndexPage />,
+    },
+    {
+        path: "/team/:teamId",
+        element: <TeamOverview />,
+    },
+    {
+        path: "*",
+        element: <NotFound />,
+    },
+]);
+
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <NextUIProvider>
-      <App />
-    </NextUIProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <NextUIProvider>
+                <main className="dark">
+                    <Toaster
+                        toastOptions={{
+                            className: "bg-zinc-700 text-white",
+                        }}
+                        richColors
+                    />
+                    <RouterProvider router={router} />
+                </main>
+            </NextUIProvider>
+        </QueryClientProvider>
+    </React.StrictMode>,
 );
