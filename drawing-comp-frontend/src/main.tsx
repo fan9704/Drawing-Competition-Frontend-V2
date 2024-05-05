@@ -9,6 +9,7 @@ import "./index.css";
 import IndexPage from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import TeamOverview from "./pages/TeamOverview.tsx";
+import ChallengeView from "./pages/Challenge.tsx";
 
 const router = createBrowserRouter([
     {
@@ -16,8 +17,12 @@ const router = createBrowserRouter([
         element: <IndexPage />,
     },
     {
-        path: "/team/:teamId",
+        path: "/team",
         element: <TeamOverview />,
+    },
+    {
+        path: "challenge/:challengeId",
+        element: <ChallengeView />,
     },
     {
         path: "*",

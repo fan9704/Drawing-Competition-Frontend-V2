@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AppShell from "../components/shared/AppShell";
 import { R1ChallengeCards } from "../utils/fakeData";
 import { ChallengeCard } from "../components/challenges/Card";
+import useCookie from "react-use-cookie";
 
 function TeamOverview() {
-    const [isLoading, setIsLoading] = useState(true);
-    const { teamId } = useParams<{ teamId: string }>();
+    const navigate = useNavigate();
+    const [teamId, _] = useCookie("teamId");
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            console.log(`Team ID: ${teamId}`);
-            setIsLoading(false);
-        }, 3000);
-        return clearTimeout(timeout);
-    }, []);
+        if (teamId === "undefined" || teamId === "") navigate("/");
+    }, [teamId]);
 
     return (
         <AppShell>

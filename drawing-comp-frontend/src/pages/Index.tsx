@@ -3,10 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import useCookie from "react-use-cookie";
 
 function IndexPage() {
     const navigate = useNavigate();
     const [teamCode, setTeamCode] = useState<string>("");
+    const [_, setTeamId] = useCookie("teamId");
 
     const checkTeamCodeMutation = useMutation({
         mutationFn: () =>
@@ -23,7 +25,8 @@ function IndexPage() {
                 return res.json();
             }),
         onSuccess: async (data) => {
-            navigate(`/team/${data.teamId}`);
+            setTeamId(data.teamId);
+            navigate(`/team`);
         },
         onError: (error) => {
             const message = JSON.parse(error.message);

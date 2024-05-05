@@ -2,20 +2,9 @@ import { Card, CardBody, CardHeader, Chip, Image } from "@nextui-org/react";
 import type { ChallengeCardType } from "../../types/challenges";
 import { Link } from "react-router-dom";
 
-function resolveChipColor(difficulty: "easy" | "medium" | "hard") {
-    switch (difficulty) {
-        case "easy":
-            return "emerald";
-        case "medium":
-            return "amber";
-        case "hard":
-            return "red";
-    }
-}
-
 export function ChallengeCard({ card }: { card: ChallengeCardType }) {
     return (
-        <Link to={`/challenges/${card.id}`}>
+        <Link to={`/challenge/${card.id}`}>
             <Card className="py-4 bg-zinc-800 w-72 rounded-md">
                 <CardBody className="overflow-visible py-2">
                     <Image
