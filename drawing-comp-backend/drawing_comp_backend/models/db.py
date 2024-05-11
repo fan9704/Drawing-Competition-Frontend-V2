@@ -9,13 +9,14 @@ class Team(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), unique=True, nullable=False)
     token = Column(String(255), unique=True, nullable=False)
-
+    submissions = relationship('Submission', back_populates='team')  # Adjusted to plural to reflect potentially multiple submissions per team.
 class Round(Base):
     __tablename__ = 'rounds'
     id = Column(Integer, primary_key=True, autoincrement=True)
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime, nullable=False)
-    challenges = relationship('challenges', back_populates='round')
+    challenges = relationship('Challenge', back_populates='round')
+    submissions = relationship('Submission', back_populates='round')
 
 class Challenge(Base):
     __tablename__ = 'challenges'
@@ -24,7 +25,8 @@ class Challenge(Base):
     image_url = Column(String(255))
     round_id = Column(Integer, ForeignKey('rounds.id'), nullable=False)
     is_valid = Column(Boolean, default=True)
-    round = relationship('rounds', back_populates='challenge')
+    round = relationship('Round', back_populates='challenges')
+    submissions = relationship('Submission', back_populates='challenges')  # Adjusted to plural since multiple submissions could be related to one challenge.
 
 class Submission(Base):
     __tablename__ = 'submissions'
@@ -34,7 +36,7 @@ class Submission(Base):
     team_id = Column(Integer, ForeignKey('teams.id'), nullable=False)
     challenge_id = Column(Integer, ForeignKey('challenges.id'), nullable=False)
     round_id = Column(Integer, ForeignKey('rounds.id'), nullable=False)
-    team = relationship('teams', back_populates='submission')
-    challenge = relationship('challenges', back_populates='submission')
-    round = relationship('rounds', back_populates='submission')
+    team = relationship('Team', back_populates='submissions')
+    challenges = relationship('Challenge', back_populates='submissions')
+    round = relationship('Round', back_populates='submissions')
 
