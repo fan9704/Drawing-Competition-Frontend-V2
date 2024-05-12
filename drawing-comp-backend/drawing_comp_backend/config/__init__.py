@@ -1,0 +1,2 @@
+from drawing_comp_backend.config.cors import cors_config
+from drawing_comp_backend.config.swagger import swagger_config
