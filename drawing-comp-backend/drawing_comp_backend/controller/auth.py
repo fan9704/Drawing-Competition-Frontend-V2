@@ -1,15 +1,5 @@
 from flask import url_for, jsonify, request, g, Blueprint, render_template
 
-# from service.problem_service import problem_service
-# from instance import problem_service
-
-# check user role at here 
-# parse json
-"""
-#####
-for testing
-#####
-"""
 auth_bp = Blueprint('auth', __name__)
 
 # @problem_bp.errorhandler(404)
@@ -37,6 +27,7 @@ def query_team(team_token):
         return jsonify({"error": "Team not found"}), 404
     return jsonify(team)
 
+@auth_bp.route("/all_teams", methods=["GET"])
 def query_all_teams():
     teams = g.auth_service.query_all_teams()
     return jsonify(teams)

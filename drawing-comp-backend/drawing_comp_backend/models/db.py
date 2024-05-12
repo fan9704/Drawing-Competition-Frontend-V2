@@ -15,13 +15,14 @@ class Round(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime, nullable=False)
+    is_valid = Column(Boolean, default=True)
     challenges = relationship('Challenge', back_populates='round')
     submissions = relationship('Submission', back_populates='round')
 
 class Challenge(Base):
     __tablename__ = 'challenges'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    description = Column(String(255), nullable=False)
+    description = Column(String(255))
     image_url = Column(String(255))
     round_id = Column(Integer, ForeignKey('rounds.id'), nullable=False)
     is_valid = Column(Boolean, default=True)
