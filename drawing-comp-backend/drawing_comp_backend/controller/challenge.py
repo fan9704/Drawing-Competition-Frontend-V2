@@ -6,6 +6,8 @@ challenge_bp = Blueprint('challenge', __name__)
 """
 ### Round
 """
+
+
 @challenge_bp.route("/rounds", methods=["POST"])
 def create_round():
     data = request.get_json()  # Get the JSON payload
@@ -22,13 +24,15 @@ def create_round():
     except ValueError as e:
         return jsonify({"error": "Invalid date format. Please use 'YYYY/MM/DD HH:MM:SS' format."}), 400
 
+
 @challenge_bp.route("/rounds/<string:round_id>", methods=["GET"])
 def query_round(round_id):
     round = g.challenge_service.query_round(round_id)
-    
+
     if round is None:
         return jsonify({"error": "Team not found"}), 404
     return jsonify(round)
+
 
 @challenge_bp.route("/rounds/<string:round_id>", methods=["DELETE"])
 def delete_round(round_id):
@@ -37,14 +41,17 @@ def delete_round(round_id):
         return jsonify({"error": "Round not found"}), 404
     return jsonify({"Round deleted": round_id})
 
+
 @challenge_bp.route("/all_rounds", methods=["GET"])
 def query_all_rounds():
     rounds = g.challenge_service.query_all_rounds()
     return jsonify(rounds)
 
+
 """ 
 ### Challenge
 """
+
 
 @challenge_bp.route("/", methods=["POST"])
 def create_challenge():
@@ -53,6 +60,7 @@ def create_challenge():
     challenge_id = g.challenge_service.create_challenge(round_id)
     return jsonify({"Create challenge": challenge_id})
 
+
 @challenge_bp.route("/<string:challenge_id>", methods=["GET"])
 def query_challenge(challenge_id):
     challenge = g.challenge_service.query_challenge(challenge_id)
@@ -60,12 +68,14 @@ def query_challenge(challenge_id):
         return jsonify({"error": "Challenge not found"}), 404
     return jsonify(challenge)
 
+
 @challenge_bp.route("/<string:challenge_id>", methods=["DELETE"])
 def delete_challenge(challenge_id):
     challenge_id = g.challenge_service.del_challenge(challenge_id)
     if not challenge_id:
         return jsonify({"error": "No challenge to be deleted"}), 404
     return jsonify({"Challenge deleted": challenge_id})
+
 
 @challenge_bp.route("/<string:challenge_id>", methods=["PUT"])
 def update_challenge(challenge_id):
