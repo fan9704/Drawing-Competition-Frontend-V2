@@ -50,8 +50,7 @@ def query_all_rounds():
 def create_challenge():
     data = request.get_json()
     round_id = data.get("round_id")
-    description = data.get("description")
-    challenge_id = g.challenge_service.create_challenge(round_id, description)
+    challenge_id = g.challenge_service.create_challenge(round_id)
     return jsonify({"Create challenge": challenge_id})
 
 @challenge_bp.route("/<string:challenge_id>", methods=["GET"])

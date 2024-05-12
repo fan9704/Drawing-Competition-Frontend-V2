@@ -13,7 +13,7 @@ class Challenges:
     """
     ### Challenge
     """
-    def create_challenge(self, round_id, description):   
+    def create_challenge(self, round_id=1):   
         with managed_session(self.session_factory) as session:
             challenge = db.Challenge(
                 round_id=round_id,

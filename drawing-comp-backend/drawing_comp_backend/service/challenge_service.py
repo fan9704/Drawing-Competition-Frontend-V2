@@ -30,8 +30,8 @@ class ChallengeService:
     ### Challenge
     """
 
-    def create_challenge(self, round_id, description):
-        challenge_id = self.challenges.create_challenge(round_id, description)
+    def create_challenge(self, round_id):
+        challenge_id = self.challenges.create_challenge(round_id)
         return challenge_id
     def query_challenge(self, challenge_id):
         challenge = self.challenges.query_challenge(challenge_id)
