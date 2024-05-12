@@ -1,9 +1,10 @@
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from utils import managed_session
-from models import db
+from drawing_comp_backend.utils import managed_session
+from drawing_comp_backend.models import db
 import os
 import hashlib
+
 
 class Teams:
     def __init__(self, sql_engine):
@@ -25,7 +26,7 @@ class Teams:
             session.add(team)
             session.commit()
             return token
-    
+
     def query_team(self, token):
         with managed_session(self.session_factory) as session:
             team = (
@@ -51,4 +52,3 @@ class Teams:
                     "token": team.token
                 })
             return team_data
-        

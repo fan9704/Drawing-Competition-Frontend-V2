@@ -1,7 +1,7 @@
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from utils import managed_session
-from models import db
+from drawing_comp_backend.utils import managed_session
+from drawing_comp_backend.models import db
 import os
 
 class Challenges:

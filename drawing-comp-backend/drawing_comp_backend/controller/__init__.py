@@ -1,2 +1,3 @@
-from .auth import *
-from .challenge import *
+from drawing_comp_backend.controller.auth import auth_bp
+from drawing_comp_backend.controller.challenge import challenge_bp
+from drawing_comp_backend.controller.hello import hello_bp
