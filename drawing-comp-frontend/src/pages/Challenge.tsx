@@ -13,9 +13,9 @@ export default function ChallengeView() {
     const navigate = useNavigate();
     const [teamId, _] = useCookie("teamId");
 
-    useEffect(() => {
-        if (teamId === "undefined" || teamId === "") navigate("/");
-    }, [teamId]);
+    // useEffect(() => {
+    //     if (teamId === "undefined" || teamId === "") navigate("/");
+    // }, [teamId]);
 
     const ChallengeData = SampleChallenge;
 

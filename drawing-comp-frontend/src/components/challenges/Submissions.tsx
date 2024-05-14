@@ -54,7 +54,13 @@ export function Submissions() {
                 <TableBody>
                     {TeamSubData.map((data, i) => (
                         <TableRow key={i}>
-                            <TableCell>{data.time.toISOString()}</TableCell>
+                            <TableCell>
+                                {data.time.toLocaleString("en-US", {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    second: "2-digit",
+                                })}
+                            </TableCell>
                             <TableCell>
                                 <Chip
                                     className="text-white"
