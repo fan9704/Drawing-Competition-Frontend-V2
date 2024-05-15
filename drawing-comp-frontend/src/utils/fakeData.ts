@@ -4,6 +4,7 @@ import {
     ChallengeType,
     LeaderboardStatusType,
 } from "../types/challenges";
+import { LeaderBoardRow } from "../types/teamview";
 
 export const R1ChallengeCards: ChallengeCardType[] = [
     {
@@ -94,5 +95,20 @@ export const SubmissionData: ChallengeSubmissionType[] = [
         matchRatio: 100,
         status: "success",
         time: new Date(),
+    },
+];
+
+export const LeaderboardData: LeaderBoardRow[] = [
+    {
+        teamName: "第一隊",
+        challengeStats: [10, 10, 10, 10, 10],
+    },
+    {
+        teamName: "第二隊",
+        challengeStats: [1, 2, 3, 4, 60],
+    },
+    {
+        teamName: "第三隊",
+        challengeStats: [5, 10, 16, 20, 100],
     },
 ];
