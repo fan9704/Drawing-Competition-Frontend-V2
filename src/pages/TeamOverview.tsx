@@ -4,14 +4,16 @@ import AppShell from "../components/shared/AppShell";
 import { R1ChallengeCards } from "../utils/fakeData";
 import { ChallengeCard } from "../components/challenges/Card";
 import useCookie from "react-use-cookie";
+import { Tab, Tabs } from "@nextui-org/react";
+import TeamLeaderboard from "../components/teamview/Leaderboard";
 
 function TeamOverview() {
     const navigate = useNavigate();
     const [teamId, _] = useCookie("teamId");
 
-    useEffect(() => {
-        if (teamId === "undefined" || teamId === "") navigate("/");
-    }, [teamId]);
+    // useEffect(() => {
+    //     if (teamId === "undefined" || teamId === "") navigate("/");
+    // }, [teamId]);
 
     return (
         <AppShell>
@@ -23,10 +25,22 @@ function TeamOverview() {
                     <h1 className="mt-4 font-bold text-6xl text-white">
                         Round 1
                     </h1>
-                    <div className="mt-4 grid grid-cols-3 gap-x-2 gap-y-4">
-                        {R1ChallengeCards.map((card) => (
-                            <ChallengeCard card={card} key={card.id} />
-                        ))}
+                    <div className="mt-4">
+                        <Tabs aria-label="round_view">
+                            <Tab key="challenges" title="題目">
+                                <div className="grid grid-cols-3 gap-x-2 gap-y-4">
+                                    {R1ChallengeCards.map((card) => (
+                                        <ChallengeCard
+                                            card={card}
+                                            key={card.id}
+                                        />
+                                    ))}
+                                </div>
+                            </Tab>
+                            <Tab key="leaderboard" title="排行榜">
+                                <TeamLeaderboard />
+                            </Tab>
+                        </Tabs>
                     </div>
                 </div>
             </div>
