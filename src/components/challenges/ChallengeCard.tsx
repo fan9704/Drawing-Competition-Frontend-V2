@@ -1,8 +1,8 @@
 import { Card, CardBody, CardHeader, Chip, Image } from "@nextui-org/react";
-import type { ChallengeCardType } from "../../types/challenges";
+import type { ChallengeType } from "../../types/challenges";
 import { Link } from "react-router-dom";
 
-export function ChallengeCard({ card }: { card: ChallengeCardType }) {
+export function ChallengeCard({ card }: { card: ChallengeType }) {
     return (
         <Link to={`/challenge/${card.id}`}>
             <Card className="py-4 bg-zinc-800 w-72 rounded-md">
@@ -10,7 +10,7 @@ export function ChallengeCard({ card }: { card: ChallengeCardType }) {
                     <Image
                         alt="Card background"
                         className="object-cover rounded-xl"
-                        src={card.image}
+                        src={card.image_url}
                         width={288}
                     />
                 </CardBody>
