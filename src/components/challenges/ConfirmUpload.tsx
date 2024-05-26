@@ -40,10 +40,10 @@ export function ConfirmUpload({
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    round: round,
                     code: code,
-                    team: decodedToken?.sub,
-                    challenge: challengeId,
+                    round: parseInt(round),
+                    team: parseInt(decodedToken?.sub ?? "0"),
+                    challenge: parseInt(challengeId),
                 }),
             }).then(async (res) => {
                 if (!res.ok) {
@@ -90,6 +90,7 @@ export function ConfirmUpload({
             toast.error("提交失敗，請再試一次！", {
                 description: error.message ?? error,
             });
+            console.error(error);
         },
     });
 

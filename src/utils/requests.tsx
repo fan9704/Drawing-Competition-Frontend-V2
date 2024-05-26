@@ -106,3 +106,79 @@ export function useRoundLeaderboardQuery({ roundId }: { roundId: string }) {
 
     return { query, tableData };
 }
+
+export function useGameResultsQuery() {
+    const [tableData, setTableData] = useState<{
+        header: { key: string; label: string }[];
+        body: { [key: string]: string | number }[];
+    }>({
+        header: [
+            { key: "teamName", label: "隊伍名稱" },
+            { key: "totalScore", label: "隊伍總分" },
+        ],
+        body: [],
+    });
+
+    const query = useQuery<
+        {
+            team_id: string;
+            team_name: string;
+            round_id_list: number[];
+            total_score_list: number[];
+        }[]
+    >({
+        queryKey: ["gameLeaderboard"],
+        queryFn: () =>
+            fetch(
+                `${import.meta.env.VITE_BACKEND_URL}/api/statistic/round/allTeam/`,
+            )
+                .then(async (res) => {
+                    if (!res.ok) {
+                        throw new Error(await res.text());
+                    }
+                    return res.json();
+                })
+                .catch((error) => {
+                    toast.error("索引排行榜時發生錯誤，請尋找課活團隊求助！", {
+                        description: error.message ?? error,
+                    });
+                }),
+    });
+
+    useEffect(() => {
+        if (!query.data) return;
+
+        const TableColumnData = [
+            { key: "teamName", label: "隊伍名稱" },
+            ...query.data[0].round_id_list.map((_, i) => ({
+                key: `Q${i + 1}`,
+                label: `Q${i + 1}`,
+            })),
+            { key: "totalScore", label: "隊伍總分" },
+        ];
+        const TableRowData = query.data
+            .map((data) => {
+                const row: { [key: string]: string | number } = {
+                    key: data.team_name,
+                    teamName: data.team_name,
+                    totalScore: data.total_score_list.reduce(
+                        (prev, cur) => prev + cur,
+                        0,
+                    ),
+                };
+                data.total_score_list.forEach((score, i) => {
+                    row[`Q${i + 1}`] = score;
+                });
+                return row;
+            })
+            .sort(
+                (a, b) => (b.totalScore as number) - (a.totalScore as number),
+            );
+        setTableData({
+            header: TableColumnData,
+            body: TableRowData,
+        });
+    }, [query.data]);
+
+    return { query, tableData };
+}

@@ -10,6 +10,7 @@ import IndexPage from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import TeamOverview from "./pages/TeamOverview.tsx";
 import ChallengeView from "./pages/Challenge.tsx";
+import GameResults from "./pages/Results.tsx";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     {
         path: "challenge/:challengeId",
         element: <ChallengeView />,
+    },
+    {
+        path: "/results",
+        element: <GameResults />,
     },
     {
         path: "*",
