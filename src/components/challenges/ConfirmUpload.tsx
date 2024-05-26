@@ -11,28 +11,46 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import StatusChip from "./submissions/StatusChip";
+import useCookie from "react-use-cookie";
+import { useJwt } from "react-jwt";
 
 export function ConfirmUpload({
+    round,
     code,
     challengeId,
     isOpen,
     onOpenChange,
 }: {
+    round: string;
     code: string;
     challengeId: string;
     isOpen: boolean;
     onOpenChange: () => void;
 }) {
+    const [teamToken] = useCookie("teamToken");
+    const { decodedToken } = useJwt<{ sub: string; name: string }>(teamToken);
+
     const queryClient = useQueryClient();
 
     const submitCodeMutation = useMutation({
-        mutationFn: () => {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve({});
-                }, 1000);
-            });
-        },
+        mutationFn: () =>
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/submission/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    round: round,
+                    code: code,
+                    team: decodedToken?.sub,
+                    challenge: challengeId,
+                }),
+            }).then(async (res) => {
+                if (!res.ok) {
+                    throw new Error(await res.text());
+                }
+                return res.json();
+            }),
         onSettled: () => {
             queryClient.invalidateQueries({
                 queryKey: ["submissions", challengeId],

@@ -45,13 +45,13 @@ export default function Header({ disable_protect }: HeaderProps) {
     useEffect(() => {
         if (!roundDataQuery.data) return setRoundRemainingTime(null);
         const interval = setInterval(() => {
-            setRoundRemainingTime(() =>
-                Math.floor(
-                    (new Date(roundDataQuery.data.end_time).getTime() -
-                        new Date().getTime()) /
-                        1000,
-                ),
+            const roundRemainingTime = Math.floor(
+                (new Date(roundDataQuery.data.end_time).getTime() -
+                    new Date().getTime()) /
+                    1000,
             );
+            setRoundRemainingTime(roundRemainingTime);
+            if (roundRemainingTime <= 0) navigate("/team");
         }, 1000);
         return () => clearInterval(interval);
     }, [roundRemainingTime, roundDataQuery.data]);

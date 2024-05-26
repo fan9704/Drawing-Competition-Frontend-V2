@@ -55,14 +55,14 @@ export default function ViewSubmission({
                             <div className="flex items-center gap-1 text-white">
                                 <CodeBracketIcon className="w-4" />
                                 <p>字數</p>
-                                <p>{subData?.wordCount}字</p>
+                                <p>{subData?.word_count}字</p>
                             </div>
                         </Chip>
                         <Chip color="primary">
                             <div className="flex items-center gap-1 text-white">
                                 <ClockIcon className="w-4" />
                                 <p>執行時間</p>
-                                <p>{subData?.execute_time}秒</p>
+                                <p>{subData?.execute_time}</p>
                             </div>
                         </Chip>
                         <Chip color="primary">

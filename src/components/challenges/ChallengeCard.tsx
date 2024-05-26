@@ -10,13 +10,13 @@ export function ChallengeCard({ card }: { card: ChallengeType }) {
                     <Image
                         alt="Card background"
                         className="object-cover rounded-xl"
-                        src={card.image_url}
+                        src={`${import.meta.env.VITE_BACKEND_URL}/${card.image_url}`}
                         width={288}
                     />
                 </CardBody>
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                     <div className="flex gap-2 items-center">
-                        <h4 className="font-bold text-large">{card.name}</h4>
+                        <h4 className="font-bold text-large">{card.title}</h4>
                         <Chip
                             size="sm"
                             className={

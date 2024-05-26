@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { ConfirmUpload } from "./ConfirmUpload";
 import { useQuery } from "@tanstack/react-query";
-import { SampleChallenge } from "../../utils/fakeData";
 
 interface ProblemDescProps {
     id: string;
@@ -19,11 +18,19 @@ export function ProblemDesc({ id }: ProblemDescProps) {
     const challengeQuery = useQuery<ChallengeType>({
         queryKey: ["challenge", id],
         queryFn: () =>
-            new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(SampleChallenge);
-                }, 1000);
-            }),
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/challenge/${id}`)
+                .then(async (res) => {
+                    if (!res.ok) {
+                        throw new Error(await res.text());
+                    }
+                    return res.json();
+                })
+                .catch((error) => {
+                    toast.error("無法取得題目資料，請找課活團隊求助！", {
+                        description: error.message ?? error,
+                    });
+                    console.error(error);
+                }),
     });
 
     return (
@@ -37,7 +44,7 @@ export function ProblemDesc({ id }: ProblemDescProps) {
             {challengeQuery.data ? (
                 <>
                     <h2 className="text-3xl mt-2 font-medium">
-                        請畫一個{challengeQuery.data.name}
+                        請畫一個{challengeQuery.data.title}
                     </h2>
                     <div className="flex justify-between mt-2 gap-8">
                         <p className="whitespace-pre-wrap text-left w-7/12 text-zinc-300">
@@ -63,6 +70,7 @@ export function ProblemDesc({ id }: ProblemDescProps) {
                             上傳程式
                         </Button>
                         <ConfirmUpload
+                            round={id}
                             code={userCode}
                             challengeId={id}
                             isOpen={isOpen}

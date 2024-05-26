@@ -6,39 +6,32 @@ import {
     TableRow,
     TableCell,
     getKeyValue,
+    Spinner,
 } from "@nextui-org/react";
-import { LeaderboardData } from "../../utils/fakeData";
+import { useRoundLeaderboardQuery } from "../../utils/requests";
 
-export default function TeamLeaderboard() {
-    const TableColumnData = [
-        { key: "teamName", label: "隊伍名稱" },
-        ...LeaderboardData[0].challengeStats.map((_, i) => ({
-            key: `Q${i + 1}`,
-            label: `Q${i + 1}`,
-        })),
-        { key: "totalScore", label: "隊伍總分" },
-    ];
+interface RoundLeaderboardProps {
+    roundId: string;
+}
 
-    const TableRowData = LeaderboardData.map((data) => {
-        const row: { [key: string]: string | number } = {
-            key: data.teamName,
-            teamName: data.teamName,
-        };
-        data.challengeStats.forEach((score, i) => {
-            row[`Q${i + 1}`] = score;
-        });
-        row.totalScore = data.challengeStats.reduce((a, b) => a + b, 0);
-        return row;
-    }).sort((a, b) => (b.totalScore as number) - (a.totalScore as number));
+export default function RoundLeaderboard({ roundId }: RoundLeaderboardProps) {
+    const { query, tableData } = useRoundLeaderboardQuery({ roundId });
+
+    console.log(tableData.header);
 
     return (
         <Table removeWrapper className="border rounded-md border-zinc-600">
-            <TableHeader columns={TableColumnData}>
+            <TableHeader columns={tableData.header}>
                 {(column) => (
                     <TableColumn key={column.key}>{column.label}</TableColumn>
                 )}
             </TableHeader>
-            <TableBody className="text-white" items={TableRowData}>
+            <TableBody
+                className="text-white"
+                items={tableData.body}
+                isLoading={query.isPending}
+                loadingContent={<Spinner label="Loading..." />}
+            >
                 {(item) => (
                     <TableRow key={item.key}>
                         {(columnKey) => (

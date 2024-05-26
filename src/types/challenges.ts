@@ -1,6 +1,6 @@
 export interface ChallengeType {
     id: string;
-    name: string;
+    title: string;
     description: string;
     difficulty: "easy" | "medium" | "hard";
     image_url: string;
@@ -11,7 +11,7 @@ export interface ChallengeSubmissionType {
     code: string;
     time: Date;
     status: "success" | "fail" | "todo" | "doing";
-    wordCount: number | string;
+    word_count: number | string;
     fitness: number | string;
     score: number | string;
     execute_time: number | string;

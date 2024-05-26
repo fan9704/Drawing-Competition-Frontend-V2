@@ -31,7 +31,11 @@ export default function BestTeams({ challengeId }: BestTeamsProps) {
     return (
         <>
             <h3 className="mt-4 mb-2 font-semibold">最佳隊伍</h3>
-            <Table removeWrapper className="border rounded-md border-zinc-600">
+            <Table
+                removeWrapper
+                className="border rounded-md border-zinc-600"
+                aria-label="最佳隊伍"
+            >
                 <TableHeader>
                     <TableColumn key="name">隊伍名稱</TableColumn>
                     <TableColumn key="matchRatio">吻合度</TableColumn>

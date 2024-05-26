@@ -13,7 +13,7 @@ export const FakeRoundData: RoundType = {
     challenges: [
         {
             id: "1",
-            name: "題目1",
+            title: "題目1",
             description: "題目1描述",
             image_url:
                 "https://external-preview.redd.it/CRpvb5lVKagBOq40Fyyt9JxjG8PfTPDMKkX_EaVn3tc.jpg?auto=webp&s=f6a3a343c6b0512e0efe6f2bbafb6c28a960afe1",
@@ -21,7 +21,7 @@ export const FakeRoundData: RoundType = {
         },
         {
             id: "2",
-            name: "題目2",
+            title: "題目2",
             description: "題目2描述",
             image_url:
                 "https://external-preview.redd.it/CRpvb5lVKagBOq40Fyyt9JxjG8PfTPDMKkX_EaVn3tc.jpg?auto=webp&s=f6a3a343c6b0512e0efe6f2bbafb6c28a960afe1",
@@ -29,7 +29,7 @@ export const FakeRoundData: RoundType = {
         },
         {
             id: "3",
-            name: "題目3",
+            title: "題目3",
             description: "題目3描述",
             image_url:
                 "https://external-preview.redd.it/CRpvb5lVKagBOq40Fyyt9JxjG8PfTPDMKkX_EaVn3tc.jpg?auto=webp&s=f6a3a343c6b0512e0efe6f2bbafb6c28a960afe1",
@@ -41,7 +41,7 @@ export const FakeRoundData: RoundType = {
 export const R1ChallengeCards: ChallengeType[] = [
     {
         id: "1",
-        name: "圓形",
+        title: "圓形",
         description: "畫一個圓形",
         difficulty: "easy",
         image_url:
@@ -49,7 +49,7 @@ export const R1ChallengeCards: ChallengeType[] = [
     },
     {
         id: "2",
-        name: "圓形",
+        title: "圓形",
         description: "畫一個圓形",
         difficulty: "easy",
         image_url:
@@ -57,7 +57,7 @@ export const R1ChallengeCards: ChallengeType[] = [
     },
     {
         id: "3",
-        name: "圓形",
+        title: "圓形",
         description: "畫一個圓形",
         difficulty: "medium",
         image_url:
@@ -65,7 +65,7 @@ export const R1ChallengeCards: ChallengeType[] = [
     },
     {
         id: "4",
-        name: "圓形",
+        title: "圓形",
         description: "畫一個圓形",
         difficulty: "medium",
         image_url:
@@ -73,7 +73,7 @@ export const R1ChallengeCards: ChallengeType[] = [
     },
     {
         id: "5",
-        name: "圓形",
+        title: "圓形",
         description: "畫一個圓形",
         difficulty: "hard",
         image_url:
@@ -81,7 +81,7 @@ export const R1ChallengeCards: ChallengeType[] = [
     },
     {
         id: "6",
-        name: "圓形",
+        title: "圓形",
         description: "畫一個圓形",
         difficulty: "hard",
         image_url:
@@ -91,7 +91,7 @@ export const R1ChallengeCards: ChallengeType[] = [
 
 export const SampleChallenge: ChallengeType = {
     id: "1",
-    name: "圓形",
+    title: "圓形",
     description:
         "Velit occaecat consectetur adipisicing qui dolore amet nostrud deserunt deserunt. Commodo pariatur excepteur commodo esse fugiat cillum sit mollit et laborum Lorem sit mollit. Cillum sit laboris id fugiat esse. Dolor reprehenderit non aliqua proident Lorem laborum aliquip do aliqua cillum.",
     difficulty: "easy",
@@ -124,7 +124,7 @@ export const SubmissionData: ChallengeSubmissionType[] = [
     {
         id: "2",
         score: 100,
-        wordCount: 10,
+        word_count: 10,
         fitness: 100,
         status: "todo",
         time: new Date(),
@@ -136,7 +136,7 @@ export const SubmissionData: ChallengeSubmissionType[] = [
     {
         id: "1",
         score: 100,
-        wordCount: 10,
+        word_count: 10,
         fitness: 100,
         status: "success",
         time: new Date(),

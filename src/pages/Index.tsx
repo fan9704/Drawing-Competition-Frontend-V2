@@ -13,24 +13,30 @@ function IndexPage() {
 
     const checkTeamCodeMutation = useMutation({
         mutationFn: () =>
-            new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve({
-                        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0IiwibmFtZSI6IuesrOS6lOmaiiIsImlhdCI6MTUxNjIzOTAyMn0.EP6GH8HdDlQlQGnsRfzQtUQmWUqT8Y3I4Y9stCT3yhc",
-                    });
-                }, 1000);
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/team/auth/token/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    token: teamCode,
+                }),
+            }).then(async (res) => {
+                console.log(res);
+                if (!res.ok) {
+                    throw new Error(await res.text());
+                }
+
+                const data = await res.json();
+                if (!data.status) {
+                    throw new Error(
+                        JSON.stringify({ message: "Token is invalid" }),
+                    );
+                }
+                return data;
             }),
-        // mutationFn: () =>
-        //     fetch(`http://127.0.0.1:8000/api/team/${teamCode}/`).then(
-        //         async (res) => {
-        //             if (!res.ok) {
-        //                 throw new Error(await res.text());
-        //             }
-        //             return res.json();
-        //         },
-        //     ),
         onSuccess: async (data: any) => {
-            setTeamToken(data.token);
+            setTeamToken(data.access_token);
             navigate(`/team`);
         },
         onError: (error) => {
