@@ -60,7 +60,9 @@ export function ProblemDesc({ id }: ProblemDescProps) {
                     </div>
                     <hr className="w-full border-b border-b-zinc-600 mt-5 mb-3" />
                     <div className="mt-2 flex items-center w-full gap-2">
-                        <Button>下載模板</Button>
+                        <a href="/template.py" download>
+                            <Button>下載模板</Button>
+                        </a>
                         <Button
                             onClick={() => {
                                 if (!fileInputRef.current) return;
