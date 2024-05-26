@@ -100,6 +100,8 @@ export function ProblemDesc({ id }: ProblemDescProps) {
                                     setUserCode(content as string);
                                     onOpen();
                                 };
+
+                                e.target.value = "";
                             }}
                         />
                     </div>
