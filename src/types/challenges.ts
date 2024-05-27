@@ -20,10 +20,11 @@ export interface ChallengeSubmissionType {
 }
 
 export interface LeaderboardStatusType {
-    name: string;
-    matchRatio: number;
-    executionTime: number;
-    weightedScore: number;
+    team: string;
+    team_name: string;
+    max_score: number;
+    fitness: number;
+    execute_time: number;
 }
 
 export interface RoundType {
