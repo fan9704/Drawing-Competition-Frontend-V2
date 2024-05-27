@@ -17,8 +17,6 @@ interface RoundLeaderboardProps {
 export default function RoundLeaderboard({ roundId }: RoundLeaderboardProps) {
     const { query, tableData } = useRoundLeaderboardQuery({ roundId });
 
-    console.log(tableData.header);
-
     return (
         <Table removeWrapper className="border rounded-md border-zinc-600">
             <TableHeader columns={tableData.header}>
