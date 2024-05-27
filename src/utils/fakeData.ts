@@ -101,22 +101,25 @@ export const SampleChallenge: ChallengeType = {
 
 export const LeaderboardStatus: LeaderboardStatusType[] = [
     {
-        name: "第一隊",
-        matchRatio: 100,
-        executionTime: 100,
-        weightedScore: 100,
+        team: "1",
+        team_name: "第一隊",
+        fitness: 100,
+        execute_time: 100,
+        max_score: 100,
     },
     {
-        name: "第二隊",
-        matchRatio: 90,
-        executionTime: 100,
-        weightedScore: 90,
+        team: "2",
+        team_name: "第二隊",
+        fitness: 90,
+        execute_time: 100,
+        max_score: 90,
     },
     {
-        name: "第三隊",
-        matchRatio: 80,
-        executionTime: 100,
-        weightedScore: 80,
+        team: "3",
+        team_name: "第三隊",
+        fitness: 80,
+        execute_time: 100,
+        max_score: 80,
     },
 ];
 
