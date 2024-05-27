@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import StatusChip from "./submissions/StatusChip";
 import useCookie from "react-use-cookie";
 import { useJwt } from "react-jwt";
+import { SubmissionQueryDisplay } from "../../types/challenges";
 
 export function ConfirmUpload({
     round,
@@ -62,7 +63,7 @@ export function ConfirmUpload({
             toast.success("提交成功！");
             queryClient.setQueryData(
                 ["submissions", challengeId],
-                (oldData: any) => {
+                (oldData: SubmissionQueryDisplay[]) => {
                     return [
                         {
                             id: uuidv4(),
