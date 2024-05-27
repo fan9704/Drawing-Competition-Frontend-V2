@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import { useQuery } from "@tanstack/react-query";
 import { ChallengeSubmissionType } from "../../../types/challenges";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ViewSubmission from "./ViewSubmission";
 import StatusChip from "./StatusChip";
 

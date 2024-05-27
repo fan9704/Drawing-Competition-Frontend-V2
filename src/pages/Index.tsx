@@ -22,16 +22,13 @@ function IndexPage() {
                     token: teamCode,
                 }),
             }).then(async (res) => {
-                console.log(res);
                 if (!res.ok) {
                     throw new Error(await res.text());
                 }
 
                 const data = await res.json();
                 if (!data.status) {
-                    throw new Error(
-                        JSON.stringify({ message: "Token is invalid" }),
-                    );
+                    throw new Error("Token is invalid");
                 }
                 return data;
             }),
@@ -40,14 +37,13 @@ function IndexPage() {
             navigate(`/team`);
         },
         onError: (error) => {
-            const errorMsg = JSON.parse(error.message);
-            console.log(errorMsg);
-            if (errorMsg.message === "Token is invalid")
+            if (error?.message === "Token is invalid")
                 toast.error(`很抱歉，但我們找不到這個隊伍！`);
             else
                 toast("未知的錯誤發生了！請尋找課活團隊求助", {
-                    description: errorMsg.message ?? errorMsg,
+                    description: error.message ?? error,
                 });
+            console.error(error);
         },
     });
 

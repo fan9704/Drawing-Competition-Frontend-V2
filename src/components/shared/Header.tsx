@@ -54,7 +54,7 @@ export default function Header({ disable_protect }: HeaderProps) {
             if (roundRemainingTime <= 0) navigate("/team");
         }, 1000);
         return () => clearInterval(interval);
-    }, [roundRemainingTime, roundDataQuery.data]);
+    }, [roundRemainingTime, roundDataQuery.data, navigate]);
 
     useEffect(() => {
         if (disable_protect) return;

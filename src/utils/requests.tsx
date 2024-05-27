@@ -2,9 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ChallengeType } from "../types/challenges";
 import { useEffect, useState } from "react";
-// import { FakeRoundData } from "./fakeData";
+import { useNavigate } from "react-router-dom";
 
 export function useRoundQuery() {
+    const navigate = useNavigate();
+
     const roundDataQuery = useQuery<{
         id: string;
         start_time: Date;
@@ -20,6 +22,10 @@ export function useRoundQuery() {
                             return null;
                         }
                         throw new Error(await res.text());
+                    }
+                    if (res.status === 204) {
+                        navigate("/results");
+                        return null;
                     }
                     return res.json();
                 })

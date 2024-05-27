@@ -33,3 +33,17 @@ export interface RoundType {
     end_time: Date;
     challenges: ChallengeType[];
 }
+
+export interface SubmissionQueryDisplay {
+    id: string;
+    code: string;
+    status: React.ElementType;
+    wordCount: string;
+    fitness: string;
+    execute_time: string;
+    stdout: string;
+    stderr: string;
+    line_number: string;
+    score: string | number;
+    time: string;
+}
