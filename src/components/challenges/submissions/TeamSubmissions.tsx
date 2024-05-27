@@ -72,7 +72,7 @@ export default function TeamSubmissions({ challengeId }: TeamSubmissionsProps) {
                     <TableColumn key="time">投稿時間</TableColumn>
                     <TableColumn key="status">執行狀態</TableColumn>
                     <TableColumn key="fitness">吻合度</TableColumn>
-                    <TableColumn key="wordCount">程式字數</TableColumn>
+                    <TableColumn key="word_count">程式字數</TableColumn>
                     <TableColumn key="score">分數</TableColumn>
                 </TableHeader>
                 <TableBody

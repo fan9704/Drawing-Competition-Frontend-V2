@@ -9,8 +9,8 @@ import {
     getKeyValue,
 } from "@nextui-org/react";
 import { useQuery } from "@tanstack/react-query";
-import { LeaderboardStatus } from "../../../utils/fakeData";
 import { LeaderboardStatusType } from "../../../types/challenges";
+import { toast } from "sonner";
 
 interface BestTeamsProps {
     challengeId: string;
@@ -20,11 +20,21 @@ export default function BestTeams({ challengeId }: BestTeamsProps) {
     const bestTeamsQuery = useQuery<LeaderboardStatusType[]>({
         queryKey: ["bestTeams", challengeId],
         queryFn: () =>
-            new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(LeaderboardStatus);
-                }, 3000);
-            }),
+            fetch(
+                `${import.meta.env.VITE_BACKEND_URL}/api/statistic/challenge/${challengeId}/top3Team/`,
+            )
+                .then(async (res) => {
+                    if (!res.ok) {
+                        throw new Error(await res.text());
+                    }
+                    return res.json();
+                })
+                .catch((error) => {
+                    toast.error("無法取得最佳隊伍資料，請找課活團隊求助！", {
+                        description: error.message ?? error,
+                    });
+                    console.error(error);
+                }),
         refetchInterval: 30000,
     });
 
@@ -37,10 +47,10 @@ export default function BestTeams({ challengeId }: BestTeamsProps) {
                 aria-label="最佳隊伍"
             >
                 <TableHeader>
-                    <TableColumn key="name">隊伍名稱</TableColumn>
-                    <TableColumn key="matchRatio">吻合度</TableColumn>
-                    <TableColumn key="executionTime">執行時間</TableColumn>
-                    <TableColumn key="weightedScore">加權分數</TableColumn>
+                    <TableColumn key="team_name">隊伍名稱</TableColumn>
+                    <TableColumn key="fitness">吻合度</TableColumn>
+                    <TableColumn key="execute_time">執行時間</TableColumn>
+                    <TableColumn key="max_score">加權分數</TableColumn>
                 </TableHeader>
                 <TableBody
                     isLoading={bestTeamsQuery.isPending}
@@ -48,7 +58,7 @@ export default function BestTeams({ challengeId }: BestTeamsProps) {
                     loadingContent={<Spinner label="Loading" />}
                 >
                     {(item) => (
-                        <TableRow key={item.name}>
+                        <TableRow key={item.team}>
                             {(columnKey) => (
                                 <TableCell>
                                     {getKeyValue(item, columnKey)}
