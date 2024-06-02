@@ -44,7 +44,6 @@ export function ConfirmUpload({
                 },
                 body: JSON.stringify({
                     code: code,
-                    round: parseInt(round),
                     team: parseInt(decodedToken?.sub ?? "0"),
                     challenge: parseInt(challengeId),
                 }),
@@ -64,29 +63,27 @@ export function ConfirmUpload({
         onSuccess: () => {
             toast.success("提交成功！");
             queryClient.setQueryData(
-                ["submissions", challengeId],
-                (oldData: SubmissionQueryDisplay[]) => {
-                    return [
-                        {
-                            id: uuidv4(),
-                            code: code,
-                            status: <StatusChip status="todo" />,
-                            wordCount: "-",
-                            fitness: "-",
-                            execute_time: "-",
-                            stdout: "",
-                            stderr: "",
-                            line_number: "-",
-                            score: "-",
-                            time: new Date().toLocaleString("en-US", {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                                second: "2-digit",
-                            }),
-                        },
-                        ...oldData,
-                    ];
-                },
+                ["submissions", challengeId, decodedToken?.sub],
+                (oldData: SubmissionQueryDisplay[]) => [
+                    {
+                        id: uuidv4(),
+                        code: code,
+                        status: <StatusChip status="todo" />,
+                        wordCount: "-",
+                        fitness: "-",
+                        execute_time: "-",
+                        stdout: "",
+                        stderr: "",
+                        line_number: "-",
+                        score: "-",
+                        time: new Date().toLocaleString("en-US", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit",
+                        }),
+                    },
+                    ...oldData,
+                ],
             );
         },
         onError: (error) => {
