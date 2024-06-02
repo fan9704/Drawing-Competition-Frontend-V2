@@ -14,12 +14,12 @@ import { useState } from "react";
 import ViewSubmission from "./ViewSubmission";
 import StatusChip from "./StatusChip";
 
-import useCookie from "react-use-cookie";
-import { useJwt } from "react-jwt";
-
 interface TeamSubmissionsProps {
     challengeId: string;
 }
+
+import { useJwt } from "react-jwt";
+import useCookie from "react-use-cookie";
 
 export default function TeamSubmissions({ challengeId }: TeamSubmissionsProps) {
     const [viewingSubmission, setViewingSubmission] =
@@ -79,6 +79,7 @@ export default function TeamSubmissions({ challengeId }: TeamSubmissionsProps) {
                     isLoading={submissionQuery.isPending}
                     items={submissionQuery.data ?? []}
                     loadingContent={<Spinner label="Loading" />}
+                    emptyContent={"你目前沒有任何投稿"}
                 >
                     {(item: any) => (
                         <TableRow

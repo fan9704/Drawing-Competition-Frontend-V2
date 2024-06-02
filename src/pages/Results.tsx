@@ -16,8 +16,8 @@ export default function GameResults() {
 
     return (
         <AppShell>
-            <div className="h-full w-full flex justify-center">
-                <div className="mt-20 w-full max-w-4xl ">
+            <div className="h-full w-full flex justify-center overflow-y-auto">
+                <div className="my-20 w-full max-w-4xl ">
                     <h1 className="mt-4 font-bold text-5xl text-white">
                         檢視遊戲結果
                     </h1>
@@ -49,6 +49,7 @@ export default function GameResults() {
                             )}
                         </TableBody>
                     </Table>
+                    <div className="h-40 w-full flex-shrink-0" />
                 </div>
             </div>
         </AppShell>
