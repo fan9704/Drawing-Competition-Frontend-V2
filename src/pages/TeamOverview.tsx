@@ -28,7 +28,7 @@ function TeamOverview() {
 
     return (
         <AppShell>
-            <div className="h-full w-full flex justify-center">
+            <div className="h-full w-full flex justify-center overflow-y-auto">
                 {roundDataQuery.data ? (
                     <div className="mt-20 w-full max-w-4xl ">
                         <h2 className="text-xl text-zinc-300">
@@ -60,6 +60,7 @@ function TeamOverview() {
                                 </Tab>
                             </Tabs>
                         </div>
+                        <div className="h-40 w-full flex-shrink-0" />
                     </div>
                 ) : (
                     <Spinner size="lg" />
