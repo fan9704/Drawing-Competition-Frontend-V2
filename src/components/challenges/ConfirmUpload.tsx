@@ -16,7 +16,6 @@ import { useJwt } from "react-jwt";
 import { SubmissionQueryDisplay } from "../../types/challenges";
 
 interface ConfirmUploadProps {
-    round: string;
     code: string;
     challengeId: string;
     isOpen: boolean;
@@ -24,7 +23,6 @@ interface ConfirmUploadProps {
 }
 
 export function ConfirmUpload({
-    round,
     code,
     challengeId,
     isOpen,
