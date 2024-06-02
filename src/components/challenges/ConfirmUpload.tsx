@@ -15,19 +15,21 @@ import useCookie from "react-use-cookie";
 import { useJwt } from "react-jwt";
 import { SubmissionQueryDisplay } from "../../types/challenges";
 
+interface ConfirmUploadProps {
+    round: string;
+    code: string;
+    challengeId: string;
+    isOpen: boolean;
+    onOpenChange: () => void;
+}
+
 export function ConfirmUpload({
     round,
     code,
     challengeId,
     isOpen,
     onOpenChange,
-}: {
-    round: string;
-    code: string;
-    challengeId: string;
-    isOpen: boolean;
-    onOpenChange: () => void;
-}) {
+}: ConfirmUploadProps) {
     const [teamToken] = useCookie("teamToken");
     const { decodedToken } = useJwt<{ sub: string; name: string }>(teamToken);
 
@@ -54,7 +56,7 @@ export function ConfirmUpload({
             }),
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: ["submissions", challengeId],
+                queryKey: ["submissions", challengeId, decodedToken?.sub],
                 refetchType: "all",
             });
             onOpenChange();
