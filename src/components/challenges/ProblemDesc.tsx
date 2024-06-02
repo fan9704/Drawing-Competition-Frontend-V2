@@ -72,7 +72,6 @@ export function ProblemDesc({ id }: ProblemDescProps) {
                             上傳程式
                         </Button>
                         <ConfirmUpload
-                            round={id}
                             code={userCode}
                             challengeId={id}
                             isOpen={isOpen}

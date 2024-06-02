@@ -11,8 +11,22 @@ import {
 import AppShell from "../components/shared/AppShell";
 import { useGameResultsQuery } from "../utils/requests";
 
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 export default function GameResults() {
     const { query, tableData } = useGameResultsQuery();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/round/state/`).then(
+            (res) => {
+                if (res.status !== 204) return;
+                navigate("/round");
+            },
+        );
+    }, []);
 
     return (
         <AppShell>

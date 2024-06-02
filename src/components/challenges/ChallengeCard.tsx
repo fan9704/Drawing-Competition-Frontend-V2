@@ -10,7 +10,7 @@ export function ChallengeCard({ card }: { card: ChallengeType }) {
                     <Image
                         alt="Card background"
                         className="object-cover rounded-xl"
-                        src={`${import.meta.env.VITE_BACKEND_URL}/${card.image_url}`}
+                        src={`${import.meta.env.VITE_BACKEND_URL}${card.image_url}`}
                         width={288}
                     />
                 </CardBody>
