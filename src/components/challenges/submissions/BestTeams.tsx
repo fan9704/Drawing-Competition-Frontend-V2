@@ -56,6 +56,7 @@ export default function BestTeams({ challengeId }: BestTeamsProps) {
                     isLoading={bestTeamsQuery.isPending}
                     items={bestTeamsQuery.data ?? []}
                     loadingContent={<Spinner label="Loading" />}
+                    emptyContent={"目前沒有隊伍成功解出本題"}
                 >
                     {(item) => (
                         <TableRow key={item.team}>
