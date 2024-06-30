@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { ConfirmUpload } from "./ConfirmUpload";
 import { useQuery } from "@tanstack/react-query";
+import ImagePreviewModal from "./problem/ImagePreviewModal";
 
 interface ProblemDescProps {
     id: string;
@@ -14,6 +15,7 @@ export function ProblemDesc({ id }: ProblemDescProps) {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [userCode, setUserCode] = useState<string>(""); // [1
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [imgPreviewOpen, setImgPreviewOpen] = useState(false);
 
     const challengeQuery = useQuery<ChallengeType>({
         queryKey: ["challenge", id],
@@ -52,11 +54,19 @@ export function ProblemDesc({ id }: ProblemDescProps) {
                         </p>
                         <div className="w-5/12">
                             <Image
+                                src={`${import.meta.env.VITE_BACKEND_URL}/${challengeQuery.data.image_url}`}
                                 alt="Card background"
-                                className="object-cover rounded-xl "
-                                src={challengeQuery.data.image_url}
+                                className="object-cover rounded-xl cursor-pointer"
+                                onClick={() => {
+                                    setImgPreviewOpen(true);
+                                }}
                             />
                         </div>
+                        <ImagePreviewModal
+                            isOpen={imgPreviewOpen}
+                            setIsOpen={setImgPreviewOpen}
+                            imageUrl={`${import.meta.env.VITE_BACKEND_URL}/${challengeQuery.data.image_url}`}
+                        />
                     </div>
                     <hr className="w-full border-b border-b-zinc-600 mt-5 mb-3" />
                     <div className="mt-2 flex items-center w-full gap-2">
