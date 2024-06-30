@@ -1,10 +1,4 @@
-import {
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-} from "@nextui-org/modal";
+import { Modal, ModalContent, ModalBody } from "@nextui-org/modal";
 import { Image } from "@nextui-org/react";
 
 interface ImagePreviewModalProps {
