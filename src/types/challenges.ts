@@ -17,6 +17,7 @@ export interface ChallengeSubmissionType {
     execute_time: number | string;
     stdout: string;
     stderr: string;
+    draw_image_url: string;
 }
 
 export interface LeaderboardStatusType {
