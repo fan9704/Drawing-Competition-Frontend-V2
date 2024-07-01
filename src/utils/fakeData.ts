@@ -135,6 +135,7 @@ export const SubmissionData: ChallengeSubmissionType[] = [
         execute_time: 0,
         stdout: ``,
         stderr: "",
+        draw_image_url: "",
     },
     {
         id: "1",
@@ -145,6 +146,7 @@ export const SubmissionData: ChallengeSubmissionType[] = [
         time: new Date(),
         code: "print('hello world')",
         execute_time: 1000,
+        draw_image_url: "",
         stdout: `
         [19/May/2024 19:09:03] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
         [19/May/2024 19:09:07] "GET /admin/api/submission/add/ HTTP/1.1" 200 21550

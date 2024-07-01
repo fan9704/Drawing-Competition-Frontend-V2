@@ -49,7 +49,7 @@ export default function BestTeams({ challengeId }: BestTeamsProps) {
                 <TableHeader>
                     <TableColumn key="team_name">隊伍名稱</TableColumn>
                     <TableColumn key="fitness">吻合度</TableColumn>
-                    <TableColumn key="execute_time">執行時間</TableColumn>
+                    <TableColumn key="word_count">程式字數</TableColumn>
                     <TableColumn key="max_score">加權分數</TableColumn>
                 </TableHeader>
                 <TableBody

@@ -59,6 +59,7 @@ export default function TeamSubmissions({ challengeId }: TeamSubmissionsProps) {
                             sub.status === "success" ? sub.execute_time : "-",
                         stdout: sub.stdout,
                         stderr: sub.stderr,
+                        draw_image_url: sub.draw_image_url,
                     }));
                 }),
         refetchInterval: 3000,

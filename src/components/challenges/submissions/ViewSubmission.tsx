@@ -8,6 +8,7 @@ import {
     Chip,
     Code,
     Tooltip,
+    Image,
 } from "@nextui-org/react";
 import { ChallengeSubmissionType } from "../../../types/challenges";
 import {
@@ -73,6 +74,13 @@ export default function ViewSubmission({
                             </div>
                         </Chip>
                     </div>
+
+                    <h3 className="font-bold text-lg mt-4">圖片預覽</h3>
+                    <Image
+                        src={`${import.meta.env.VITE_BACKEND_URL}/${subData?.draw_image_url}`}
+                        alt="Problem Image"
+                        className="rounded-xl w-[720px]"
+                    />
 
                     <h3 className="font-bold text-lg mt-4">程式碼</h3>
                     <Code className="whitespace-pre  overflow-auto text-white bg-zinc-900 p-3">
