@@ -19,7 +19,9 @@ export default function Intermission() {
                     <h2 className="mt-20 text-4xl font-semibold text-zinc-100 text-center">
                         休息一下
                     </h2>
-                    <p className="text-xl text-zinc-100 mt-4">{dadJoke}</p>
+                    <p className="text-xl text-zinc-100 mt-6 leading-8 whitespace-pre text-center">
+                        {dadJoke}
+                    </p>
                 </div>
             </div>
         </AppShell>
