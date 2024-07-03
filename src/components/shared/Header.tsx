@@ -10,10 +10,12 @@ import {
     DropdownItem,
 } from "@nextui-org/react";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
-import { ClockIcon } from "@heroicons/react/20/solid";
+import { ClockIcon } from "@heroicons/react/24/outline";
 
 import useLogout from "../../utils/auth";
 import { useRoundQuery } from "../../utils/requests";
+// import HelpButton from "./HelpButton";
+import { getCurrentTime } from "../../utils/time";
 
 interface HeaderProps {
     disable_protect?: boolean;
@@ -36,7 +38,7 @@ export default function Header({ disable_protect }: HeaderProps) {
 
         const remainingTime = Math.floor(
             (new Date(roundDataQuery.data.end_time).getTime() -
-                new Date().getTime()) /
+                getCurrentTime().getTime()) /
                 1000,
         );
         setRoundRemainingTime(remainingTime);
@@ -47,7 +49,7 @@ export default function Header({ disable_protect }: HeaderProps) {
         const interval = setInterval(() => {
             const roundRemainingTime = Math.floor(
                 (new Date(roundDataQuery.data.end_time).getTime() -
-                    new Date().getTime()) /
+                    getCurrentTime().getTime()) /
                     1000,
             );
             setRoundRemainingTime(roundRemainingTime);
@@ -102,6 +104,7 @@ export default function Header({ disable_protect }: HeaderProps) {
                             </p>
                         </div>
                     )}
+                    {/* <HelpButton /> */}
                     <Dropdown className="dark">
                         <DropdownTrigger>
                             <button className="px-3 py-1.5 border border-zinc-500 text-white rounded-md flex gap-2 items-center">

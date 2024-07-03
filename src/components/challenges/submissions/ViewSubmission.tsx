@@ -77,7 +77,7 @@ export default function ViewSubmission({
 
                     <h3 className="font-bold text-lg mt-4">圖片預覽</h3>
                     <Image
-                        src={`${import.meta.env.VITE_BACKEND_URL}/media/result/${subData?.id}.png`}
+                        src={`${import.meta.env.VITE_BACKEND_URL}/${subData?.draw_image_url}`}
                         alt="Problem Image"
                         className="rounded-xl w-[720px]"
                     />
