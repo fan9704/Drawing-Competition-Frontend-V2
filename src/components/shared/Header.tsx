@@ -18,10 +18,10 @@ import { useRoundQuery } from "../../utils/requests";
 import { getCurrentTime } from "../../utils/time";
 
 interface HeaderProps {
-    disable_protect?: boolean;
+    allowAnon?: boolean;
 }
 
-export default function Header({ disable_protect }: HeaderProps) {
+export default function Header({ allowAnon }: HeaderProps) {
     const logout = useLogout();
     const navigate = useNavigate();
 
@@ -59,52 +59,48 @@ export default function Header({ disable_protect }: HeaderProps) {
     }, [roundRemainingTime, roundDataQuery.data, navigate]);
 
     useEffect(() => {
-        if (disable_protect) return;
+        if (allowAnon) return;
         if (
             teamToken === "undefined" ||
             teamToken === "" ||
             !decodeToken(teamToken)
         )
             logout();
-    }, [decodedToken, disable_protect, logout, teamToken]);
+    }, [decodedToken, allowAnon, logout, teamToken]);
 
     return (
         <header className="bg-zinc-900 h-16 border-b border-b-zinc-400 text-white px-14 flex justify-between items-center">
             <div className="flex gap-4">
-                <Link to="/team">
+                <Link to={allowAnon ? "/" : "/team"}>
                     <h1 className="text-xl font-bold">Scribble Showdown</h1>
                 </Link>
             </div>
-            {disable_protect ? (
-                <div></div>
-            ) : (
-                <div className="flex gap-4 items-center justify-end">
-                    {roundRemainingTime && (
-                        <div
-                            className={`px-3 py-1.5 text-white rounded-md font-bold flex gap-1 items-center ${
-                                roundRemainingTime > 900
-                                    ? "bg-green-600"
-                                    : roundRemainingTime > 300
-                                      ? "bg-yellow-600"
-                                      : "bg-red-600"
-                            }`}
-                        >
-                            <ClockIcon className="w-5 text-white" />
-                            <p>
-                                {Math.max(
-                                    Math.floor(roundRemainingTime / 60),
-                                    0,
-                                )
-                                    .toString()
-                                    .padStart(2, "0")}
-                                :
-                                {Math.max(roundRemainingTime % 60, 0)
-                                    .toString()
-                                    .padStart(2, "0")}
-                            </p>
-                        </div>
-                    )}
-                    {/* <HelpButton /> */}
+
+            <div className="flex gap-4 items-center justify-end">
+                {roundRemainingTime && (
+                    <div
+                        className={`px-3 py-1.5 text-white rounded-md font-bold flex gap-1 items-center ${
+                            roundRemainingTime > 900
+                                ? "bg-green-600"
+                                : roundRemainingTime > 300
+                                  ? "bg-yellow-600"
+                                  : "bg-red-600"
+                        }`}
+                    >
+                        <ClockIcon className="w-5 text-white" />
+                        <p>
+                            {Math.max(Math.floor(roundRemainingTime / 60), 0)
+                                .toString()
+                                .padStart(2, "0")}
+                            :
+                            {Math.max(roundRemainingTime % 60, 0)
+                                .toString()
+                                .padStart(2, "0")}
+                        </p>
+                    </div>
+                )}
+                {/* <HelpButton /> */}
+                {decodedToken && (
                     <Dropdown className="dark">
                         <DropdownTrigger>
                             <button className="px-3 py-1.5 border border-zinc-500 text-white rounded-md flex gap-2 items-center">
@@ -126,8 +122,8 @@ export default function Header({ disable_protect }: HeaderProps) {
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
-                </div>
-            )}
+                )}
+            </div>
         </header>
     );
 }

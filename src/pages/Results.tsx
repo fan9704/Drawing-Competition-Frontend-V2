@@ -26,12 +26,15 @@ export default function GameResults() {
     }, [navigate]);
 
     return (
-        <AppShell>
+        <AppShell allowAnon>
             <div className="h-full w-full flex justify-center overflow-y-auto">
                 <div className="my-20 w-full max-w-4xl ">
                     <h1 className="mt-4 font-bold text-5xl text-white">
-                        檢視遊戲結果
+                        遊戲結束！
                     </h1>
+                    <h2 className="mt-4 text-2xl text-zinc-400">
+                        檢視遊戲結果
+                    </h2>
                     <Table
                         removeWrapper
                         className="border rounded-md border-zinc-600 mt-8"
