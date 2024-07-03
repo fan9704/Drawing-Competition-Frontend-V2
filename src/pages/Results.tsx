@@ -20,11 +20,9 @@ export default function GameResults() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/round/state/`).then(
-            (res) => {
-                if (res.status !== 204) navigate("/team");
-            },
-        );
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/round/`).then((res) => {
+            if (res.status !== 204) navigate("/team");
+        });
     }, [navigate]);
 
     return (
