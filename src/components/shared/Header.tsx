@@ -14,7 +14,7 @@ import { ClockIcon } from "@heroicons/react/24/outline";
 
 import useLogout from "../../utils/auth";
 import { useRoundQuery } from "../../utils/requests";
-// import HelpButton from "./HelpButton";
+import HelpButton from "./HelpButton";
 import { getCurrentTime } from "../../utils/time";
 
 interface HeaderProps {
@@ -99,7 +99,7 @@ export default function Header({ allowAnon }: HeaderProps) {
                         </p>
                     </div>
                 )}
-                {/* <HelpButton /> */}
+                <HelpButton />
                 {decodedToken && (
                     <Dropdown className="dark">
                         <DropdownTrigger>
