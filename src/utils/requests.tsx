@@ -71,6 +71,15 @@ export function useRoundLeaderboardQuery({ roundId }: { roundId: string }) {
                     }
                     return res.json();
                 })
+                .then((res) =>
+                    res.map((team: any) => ({
+                        ...team,
+                        total_score: team.score_list.reduce(
+                            (a: number, b: number) => a + b,
+                            0,
+                        ),
+                    })),
+                )
                 .catch((error) => {
                     toast.error("索引排行榜時發生錯誤，請尋找課活團隊求助！", {
                         description: error.message ?? error,
