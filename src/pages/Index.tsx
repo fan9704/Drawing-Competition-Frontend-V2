@@ -58,7 +58,7 @@ function IndexPage() {
             <div className="w-full max-w-6xl flex items-center text-white">
                 <div>
                     <h1 className="text-8xl font-semibold">
-                        Scribble <br /> Showdown
+                        Python <br /> 繪圖大挑戰
                     </h1>
                     <form
                         className="mt-4 flex items-center justify-between gap-3"

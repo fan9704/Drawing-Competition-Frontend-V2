@@ -14,7 +14,7 @@ import { ClockIcon } from "@heroicons/react/24/outline";
 
 import useLogout from "../../utils/auth";
 import { useRoundQuery } from "../../utils/requests";
-import HelpButton from "./HelpButton";
+// import HelpButton from "./HelpButton";
 import { getCurrentTime } from "../../utils/time";
 
 interface HeaderProps {
@@ -41,22 +41,23 @@ export default function Header({ allowAnon }: HeaderProps) {
                 getCurrentTime().getTime()) /
                 1000,
         );
+
         setRoundRemainingTime(remainingTime);
     }, [roundDataQuery.data]);
 
     useEffect(() => {
         if (!roundDataQuery.data) return setRoundRemainingTime(null);
         const interval = setInterval(() => {
-            const roundRemainingTime = Math.floor(
+            const newRemainingTime = Math.floor(
                 (new Date(roundDataQuery.data.end_time).getTime() -
                     getCurrentTime().getTime()) /
                     1000,
             );
-            setRoundRemainingTime(roundRemainingTime);
-            if (roundRemainingTime <= 0) navigate("/team");
+            setRoundRemainingTime(newRemainingTime);
+            if (newRemainingTime <= 0) navigate("/team");
         }, 1000);
         return () => clearInterval(interval);
-    }, [roundRemainingTime, roundDataQuery.data, navigate]);
+    }, [roundDataQuery.data, navigate]);
 
     useEffect(() => {
         if (allowAnon) return;
@@ -99,7 +100,7 @@ export default function Header({ allowAnon }: HeaderProps) {
                         </p>
                     </div>
                 )}
-                <HelpButton />
+                {/* <HelpButton /> */}
                 {decodedToken && (
                     <Dropdown className="dark">
                         <DropdownTrigger>
