@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import useCookie from "react-use-cookie";
@@ -10,6 +10,12 @@ function IndexPage() {
     const navigate = useNavigate();
     const [teamCode, setTeamCode] = useState<string>("");
     const [, setTeamToken] = useCookie("teamToken");
+
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/round/`).then((res) => {
+            if (res.status === 204) navigate("/results");
+        });
+    }, [navigate]);
 
     const checkTeamCodeMutation = useMutation({
         mutationFn: () =>
