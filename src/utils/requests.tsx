@@ -166,8 +166,8 @@ export function useGameResultsQuery() {
         const TableColumnData = [
             { key: "teamName", label: "隊伍名稱" },
             ...query.data[0].round_id_list.map((_, i) => ({
-                key: `Q${i + 1}`,
-                label: `Q${i + 1}`,
+                key: `Round ${i + 1}`,
+                label: `Round ${i + 1}`,
             })),
             { key: "totalScore", label: "隊伍總分" },
         ];
@@ -182,7 +182,7 @@ export function useGameResultsQuery() {
                     ),
                 };
                 data.total_score_list.forEach((score, i) => {
-                    row[`Q${i + 1}`] = score;
+                    row[`Round ${i + 1}`] = score;
                 });
                 return row;
             })
