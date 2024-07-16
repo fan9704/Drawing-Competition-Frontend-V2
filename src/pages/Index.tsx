@@ -57,7 +57,7 @@ function IndexPage() {
         <div className="fixed inset-0 flex justify-center items-center bg-zinc-900">
             <div className="w-full max-w-6xl flex items-center text-white">
                 <div>
-                    <h1 className="text-8xl font-semibold">
+                    <h1 className="text-8xl font-semibold leading-[110px]">
                         Python <br /> 繪圖大挑戰
                     </h1>
                     <form
