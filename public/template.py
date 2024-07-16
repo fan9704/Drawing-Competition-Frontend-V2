@@ -2,7 +2,7 @@ import turtle as turtle
 
 
 # Do NOT rename this function as it will stop the judge from finding what code to run, resulting in a failure
-def drawing(pen):
+def drawing(pen: turtle.Turtle):
     ## TODO: Implement the drawing function
     pass
 
