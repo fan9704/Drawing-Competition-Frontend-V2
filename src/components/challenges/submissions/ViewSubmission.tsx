@@ -43,44 +43,50 @@ export default function ViewSubmission({
                     Submission {subData?.id}
                 </ModalHeader>
                 <ModalBody>
-                    <div className="flex gap-2 ">
-                        {subData?.status}
-                        <Chip color="primary">
-                            <div className="flex items-center gap-1 text-white">
-                                <CameraIcon className="w-4" />
-                                <p>吻合度</p>
-                                <p>{subData?.fitness}%</p>
-                            </div>
-                        </Chip>
-                        <Chip color="primary">
-                            <div className="flex items-center gap-1 text-white">
-                                <CodeBracketIcon className="w-4" />
-                                <p>字數</p>
-                                <p>{subData?.word_count}字</p>
-                            </div>
-                        </Chip>
-                        <Chip color="primary">
-                            <div className="flex items-center gap-1 text-white">
-                                <ClockIcon className="w-4" />
-                                <p>執行時間</p>
-                                <p>{subData?.execute_time}</p>
-                            </div>
-                        </Chip>
-                        <Chip color="primary">
-                            <div className="flex items-center gap-1 text-white">
-                                <HashtagIcon className="w-4" />
-                                <p>分數</p>
-                                <p>{subData?.score}</p>
-                            </div>
-                        </Chip>
-                    </div>
+                    {subData?.status === "success" ? (
+                        <div className="flex gap-2 ">
+                            {subData?.status}
+                            <Chip color="primary">
+                                <div className="flex items-center gap-1 text-white">
+                                    <CameraIcon className="w-4" />
+                                    <p>吻合度</p>
+                                    <p>{subData?.fitness}%</p>
+                                </div>
+                            </Chip>
+                            <Chip color="primary">
+                                <div className="flex items-center gap-1 text-white">
+                                    <CodeBracketIcon className="w-4" />
+                                    <p>字數</p>
+                                    <p>{subData?.word_count}字</p>
+                                </div>
+                            </Chip>
+                            <Chip color="primary">
+                                <div className="flex items-center gap-1 text-white">
+                                    <ClockIcon className="w-4" />
+                                    <p>執行時間</p>
+                                    <p>{subData?.execute_time}</p>
+                                </div>
+                            </Chip>
+                            <Chip color="primary">
+                                <div className="flex items-center gap-1 text-white">
+                                    <HashtagIcon className="w-4" />
+                                    <p>分數</p>
+                                    <p>{subData?.score}</p>
+                                </div>
+                            </Chip>
+                        </div>
+                    ) : null}
 
-                    <h3 className="font-bold text-lg mt-4">圖片預覽</h3>
-                    <Image
-                        src={`${import.meta.env.VITE_BACKEND_URL}/${subData?.draw_image_url}`}
-                        alt="Problem Image"
-                        className="rounded-xl w-[720px]"
-                    />
+                    {subData?.status === "success" ? (
+                        <>
+                            <h3 className="font-bold text-lg mt-4">圖片預覽</h3>
+                            <Image
+                                src={`${import.meta.env.VITE_BACKEND_URL}/${subData?.draw_image_url}`}
+                                alt="Problem Image"
+                                className="rounded-xl w-[720px]"
+                            />
+                        </>
+                    ) : null}
 
                     <h3 className="font-bold text-lg mt-4">程式碼</h3>
                     <Code className="whitespace-pre  overflow-auto text-white bg-zinc-900 p-3">
