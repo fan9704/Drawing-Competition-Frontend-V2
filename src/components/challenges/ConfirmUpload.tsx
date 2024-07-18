@@ -14,6 +14,11 @@ import StatusChip from "./submissions/StatusChip";
 import useCookie from "react-use-cookie";
 import { useJwt } from "react-jwt";
 import { SubmissionQueryDisplay } from "../../types/challenges";
+import { useEffect, useState } from "react";
+import {
+    drawingDefFuncCode,
+    finalExecCode,
+} from "../../utils/templateTextConsts";
 
 interface ConfirmUploadProps {
     code: string;
@@ -30,8 +35,28 @@ export function ConfirmUpload({
 }: ConfirmUploadProps) {
     const [teamToken] = useCookie("teamToken");
     const { decodedToken } = useJwt<{ sub: string; name: string }>(teamToken);
+    const [errors, setErrors] = useState<string[]>([]);
 
     const queryClient = useQueryClient();
+
+    useEffect(() => {
+        const finalErrors = [];
+        console.log(code.includes(drawingDefFuncCode));
+        if (!code.includes(drawingDefFuncCode)) {
+            finalErrors.push(
+                "沒有在你的程式碼中找到 drawing 函數的定義，你有使用模板嗎？",
+            );
+        }
+        if (!code.includes(finalExecCode)) {
+            finalErrors.push(
+                "你的程式碼似乎有變動最終執行程式的段落（if __name__ == ....），請將其復原成模板的程式",
+            );
+        }
+        console.log(finalErrors);
+        setErrors(finalErrors);
+    }, [code]);
+
+    console.log(errors.length);
 
     const submitCodeMutation = useMutation({
         mutationFn: () =>
@@ -108,6 +133,14 @@ export function ConfirmUpload({
                             <Code className="whitespace-pre max-h-[400px] overflow-scroll text-white bg-zinc-900 p-3">
                                 {code}
                             </Code>
+                            {errors.map((error, i) => (
+                                <div
+                                    key={i}
+                                    className="w-full px-6 py-3 bg-red-300 rounded-md text-red-700 font-bold"
+                                >
+                                    {error}
+                                </div>
+                            ))}
                         </ModalBody>
                         <ModalFooter>
                             <Button onPress={onClose}>取消</Button>
@@ -117,6 +150,8 @@ export function ConfirmUpload({
                                     submitCodeMutation.mutate();
                                 }}
                                 color="success"
+                                className="disabled:hover:cursor-not-allowed"
+                                isDisabled={errors.length > 0}
                             >
                                 提交
                             </Button>
