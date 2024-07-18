@@ -16,6 +16,7 @@ import useLogout from "../../utils/auth";
 import { useRoundQuery } from "../../utils/requests";
 // import HelpButton from "./HelpButton";
 import { getCurrentTime } from "../../utils/time";
+import HelpButton from "./HelpButton";
 
 interface HeaderProps {
     allowAnon?: boolean;
@@ -125,6 +126,7 @@ export default function Header({ allowAnon }: HeaderProps) {
                     </Dropdown>
                 )}
             </div>
+            <HelpButton />
         </header>
     );
 }

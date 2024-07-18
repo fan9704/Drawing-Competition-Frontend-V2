@@ -1,4 +1,4 @@
-import turtle as turtle
+import turtle
 
 
 # Do NOT rename this function as it will stop the judge from finding what code to run, resulting in a failure
@@ -13,7 +13,6 @@ def drawing(pen: turtle.Turtle):
 #################
 """
 if __name__ == "__main__":
-    s = turtle.getscreen()
     pen = turtle.Turtle()
     drawing(pen)
     turtle.done()

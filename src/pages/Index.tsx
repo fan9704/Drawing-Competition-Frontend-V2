@@ -5,6 +5,7 @@ import useCookie from "react-use-cookie";
 import { toast } from "sonner";
 
 import { Button, Input } from "@nextui-org/react";
+import HelpButton from "../components/shared/HelpButton";
 
 function IndexPage() {
     const navigate = useNavigate();
@@ -83,6 +84,7 @@ function IndexPage() {
                     </form>
                 </div>
             </div>
+            <HelpButton />
         </div>
     );
 }
