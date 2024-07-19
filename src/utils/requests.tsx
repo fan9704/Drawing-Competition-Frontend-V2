@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { ChallengeType } from "../types/challenges";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { TeamOverviewResults } from "../types/teamview";
 
 export function useRoundQuery() {
     const navigate = useNavigate();
@@ -137,7 +138,7 @@ export function useGameResultsQuery() {
 
     const query = useQuery<
         {
-            team_id: string;
+            team_id: number;
             team_name: string;
             round_id_list: number[];
             total_score_list: number[];
@@ -154,10 +155,29 @@ export function useGameResultsQuery() {
                     }
                     return res.json();
                 })
+                .then((res: TeamOverviewResults[]) => {
+                    const sortedData = res.map((team) =>
+                        team.round_id_list
+                            .map((round_id: number, i: number) => ({
+                                id: round_id,
+                                score: team.total_score_list[i],
+                            }))
+                            .sort((a, b) => a.id - b.id),
+                    );
+                    return res.map((team, i) => ({
+                        ...team,
+                        round_id_list: sortedData[i].map((data) => data.id),
+                        total_score_list: sortedData[i].map(
+                            (data: any) => data.score,
+                        ),
+                    }));
+                })
                 .catch((error) => {
                     toast.error("索引排行榜時發生錯誤，請尋找課活團隊求助！", {
                         description: error.message ?? error,
                     });
+
+                    throw error;
                 }),
     });
 
