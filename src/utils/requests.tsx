@@ -85,6 +85,7 @@ export function useRoundLeaderboardQuery({ roundId }: { roundId: string }) {
                         description: error.message ?? error,
                     });
                 }),
+        refetchInterval: 20000,
     });
 
     useEffect(() => {
