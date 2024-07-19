@@ -10,7 +10,7 @@ export interface ChallengeSubmissionType {
     id: string;
     code: string;
     time: Date;
-    status: "success" | "fail" | "todo" | "doing";
+    statusEnum: "success" | "fail" | "todo" | "doing";
     word_count: number | string;
     fitness: number | string;
     score: number | string;

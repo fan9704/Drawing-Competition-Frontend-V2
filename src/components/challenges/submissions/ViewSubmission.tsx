@@ -43,9 +43,8 @@ export default function ViewSubmission({
                     Submission {subData?.id}
                 </ModalHeader>
                 <ModalBody>
-                    {subData?.status === "success" ? (
+                    {subData?.statusEnum === "success" ? (
                         <div className="flex gap-2 ">
-                            {subData?.status}
                             <Chip color="primary">
                                 <div className="flex items-center gap-1 text-white">
                                     <CameraIcon className="w-4" />
@@ -77,7 +76,7 @@ export default function ViewSubmission({
                         </div>
                     ) : null}
 
-                    {subData?.status === "success" ? (
+                    {subData?.statusEnum === "success" ? (
                         <>
                             <h3 className="font-bold text-lg mt-4">圖片預覽</h3>
                             <Image
