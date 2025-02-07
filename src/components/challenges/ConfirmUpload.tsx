@@ -17,7 +17,7 @@ import { SubmissionQueryDisplay } from "../../types/challenges";
 import { useEffect, useState } from "react";
 import {
     drawingDefFuncCode,
-    finalExecCode,
+    // finalExecCode,
 } from "../../utils/templateTextConsts";
 
 interface ConfirmUploadProps {
