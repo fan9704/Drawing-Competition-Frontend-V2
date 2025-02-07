@@ -74,7 +74,7 @@ export default function Header({ allowAnon }: HeaderProps) {
         <header className="bg-zinc-900 h-16 border-b border-b-zinc-400 text-white px-14 flex justify-between items-center">
             <div className="flex gap-4">
                 <Link to={allowAnon ? "/" : "/team"}>
-                    <h1 className="text-xl font-bold">Scribble Showdown</h1>
+                    <h1 className="text-xl font-bold">Python 繪圖大挑戰</h1>
                 </Link>
             </div>
 

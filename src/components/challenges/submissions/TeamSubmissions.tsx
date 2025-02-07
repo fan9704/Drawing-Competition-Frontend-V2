@@ -32,7 +32,7 @@ export default function TeamSubmissions({ challengeId }: TeamSubmissionsProps) {
         queryKey: ["submissions", challengeId, decodedToken?.sub],
         queryFn: () =>
             fetch(
-                `${import.meta.env.VITE_BACKEND_URL}/api/submission/challenge/${challengeId}/team/${decodedToken?.sub}/`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/submission/all/${challengeId}/${decodedToken?.sub}/`,
             )
                 .then(async (res) => {
                     if (!res.ok) {

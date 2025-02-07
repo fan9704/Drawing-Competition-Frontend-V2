@@ -17,7 +17,7 @@ import { SubmissionQueryDisplay } from "../../types/challenges";
 import { useEffect, useState } from "react";
 import {
     drawingDefFuncCode,
-    finalExecCode,
+    // finalExecCode,
 } from "../../utils/templateTextConsts";
 
 interface ConfirmUploadProps {
@@ -47,11 +47,11 @@ export function ConfirmUpload({
                 "沒有在你的程式碼中找到 drawing 函數的定義，你有使用模板嗎？",
             );
         }
-        if (!code.includes(finalExecCode)) {
-            finalErrors.push(
-                "你的程式碼似乎有變動最終執行程式的段落（if __name__ == ....），請將其復原成模板的程式",
-            );
-        }
+        // if (!code.includes(finalExecCode)) {
+        //     finalErrors.push(
+        //         "你的程式碼似乎有變動最終執行程式的段落（if __name__ == ....），請將其復原成模板的程式",
+        //     );
+        // }
         console.log(finalErrors);
         setErrors(finalErrors);
     }, [code]);
